@@ -11,23 +11,26 @@ import java.util.Optional;
 @Service
 public class WasteCategoryService {
 
-    @Autowired
-    private WasteCategoryRepository repository;
+    private final WasteCategoryRepository wasteCategoryRepository;
 
-    public List<WasteCategory> getAllWasteCategories() {
-        return repository.findAll();
+    @Autowired
+    public WasteCategoryService(WasteCategoryRepository wasteCategoryRepository) {
+        this.wasteCategoryRepository = wasteCategoryRepository;
     }
 
-    public Optional<WasteCategory> getWasteCategory(Long id) {
-        return repository.findById(id);
+    public List<WasteCategory> getAllWasteCategories() {
+        return wasteCategoryRepository.findAll();
+    }
+
+    public Optional<WasteCategory> getWasteCategoryById(Long id) {
+        return wasteCategoryRepository.findById(id);
     }
 
     public WasteCategory saveWasteCategory(WasteCategory wasteCategory) {
-        return repository.save(wasteCategory);
+        return wasteCategoryRepository.save(wasteCategory);
     }
 
     public void deleteWasteCategory(Long id) {
-        repository.deleteById(id);
+        wasteCategoryRepository.deleteById(id);
     }
 }
-
